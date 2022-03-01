@@ -1,0 +1,131 @@
+{% extends 'admin_dashboard/index.html' %}
+{% load static %}
+{% block body %}
+<hr>
+<div class="container bootstrap snippet">
+   
+    <div class="row">
+  		<div class="col-sm-3"><!--left col-->
+              
+
+      <div class="text-center">
+        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+      </div></hr><br>
+        </div>
+    	<div class="col-sm-9">  
+          <div class="tab-content">
+            <div class="tab-pane active" id="home">
+                <hr>
+                {% if user_detail_error %}
+                <h2>{{user_detail_error}}</h2>
+                {% else %}
+                  <form class="form" action="##" method="post" id="registrationForm">
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="first_name"><h4>Bussiness Type</h4></label>
+                              <li class="form-control">{{ user_detail.bussiness_type }}</li>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="first_name"><h4>Category</h4></label>
+                              <li class="form-control">{{ user_detail.category }}</li>
+                          </div>
+                      </div><div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="first_name"><h4>Subcategory</h4></label>
+                              <li class="form-control">{{ user_detail.subcategory }}</li>
+                          </div>
+                      </div>
+          				<div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="first_name"><h4>Conatct Number</h4></label>
+                              <li class="form-control">{{ user_detail.user_conatct }}</li>
+                          </div>
+                      </div><div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="first_name"><h4>Country</h4></label>
+                              <li class="form-control">{{ user_detail.country }}</li>
+                          </div>
+                      </div><div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="first_name"><h4>State</h4></label>
+                              <li class="form-control">{{ user_detail.state }}</li>
+                          </div>
+                      </div><div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="first_name"><h4>City</h4></label>
+                              <li class="form-control">{{ user_detail.city }}</li>
+                          </div>
+                      </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="first_name"><h4>Zip Code</h4></label>
+                              <li class="form-control">{{ user_detail.zip_code }}</li>
+                          </div>
+                      </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="first_name"><h4>Detail Address</h4></label>
+                              <li class="form-control">{{ user_detail.detail_address }}</li>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="first_name"><h4>Profile Status</h4></label>
+                              <li class="form-control">{{ user_detail.profile_status }}</li>
+                          </div>
+                      </div>
+                    
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="first_name"><h4>Created at</h4></label>
+                              <li class="form-control">{{ user_detail.created_at }}</li>
+                          </div>
+                      </div>
+                      
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="first_name"><h4>Updated at</h4></label>
+                              <li class="form-control">{{ user_detail.updated_at }}</li>
+                          </div>
+                      </div>
+                       <div class="form-group">
+                           <div class="col-xs-12">
+                                <br>
+                      {% if user_detail.user.is_superuser %}
+                      {% else %}
+                      <button class="btn btn-lg btn-danger" type="submit"><i class="glyphicon glyphicon-ok-sign"></i>Delete</button>
+                      <button class="btn btn-lg btn-success" type="reset"><i class="glyphicon glyphicon-repeat"></i>Delete</button>
+                      {% endif %}
+                            </div>
+                      </div>
+              	</form>
+              {% endif %}
+              <hr>
+              
+             </div><!--/tab-pane-->
+            
+               
+              </div><!--/tab-pane-->
+          </div><!--/tab-content-->
+
+        </div><!--/col-9-->
+    </div><!--/row-->
+
+
+{% endblock body %}

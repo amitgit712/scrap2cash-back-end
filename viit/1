@@ -1,0 +1,8 @@
+DEBUG=on
+SECRET_KEY=xl(4e^6-v(jvew2azkt#2d3azb80ruy14m6!&4yubunb!mgrrq
+JWT_SECRET_KEY=sdQAZzNsqu#4!D7eum@3e2$!m-E25d
+DATABASE_URL=psql://scrap:scrap@123@127.0.0.1:5432/scrap
+FRONTEND_URL=http://localhost:4200
+BACKEND_URL=http://127.0.0.1:8000
+MEDIA_URL=http://127.0.0.1:8000/media/
+

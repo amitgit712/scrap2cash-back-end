@@ -1,0 +1,43 @@
+{% extends 'admin_dashboard/index.html' %}
+{% load static %}
+{% block body %}
+
+
+<main>
+<div class="container-fluid">
+<br>
+<div class="card mb-4">
+    <div class="card-header"><i class="fas fa-table mr-1"></i>Uapproved Posts</div>
+    <div class="card-body">
+        <div class="table-responsive">
+         <table class="table table-bordered text-center text-capitalize" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>View</th>
+                        
+                        <th>Suspend</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+{% for i in unapproved_post %}
+
+                    <tr>
+                        <td><img src="{{ i.images.url }}" height="50" width="50"></td>
+                        <td>{{ i.industry_post.material.material_type }}</td>
+                        <td><a class="btn btn-info" href="{% url 'admin_dashboard:view_post' i.industry_post.id %}">view</a></td>
+
+                        <td><a class="btn btn-success" href="{% url 'admin_dashboard:approve_post' i.industry_post.id %}">Approve</a></td>
+                    </tr>
+{% endfor %}
+                        </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+</main>
+{% endblock body %}

@@ -1,0 +1,215 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Scrap2Cash</title>
+        <link href="{% static 'admin_dashboard/css/styles.css' %}" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+    </head>
+
+
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <a class="navbar-brand" href="index.html">Scrap2Cash</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button
+            >
+
+            <div class="col-md-3 push-right">
+                <span style="color:white;">{{ user.first_name|title }}&nbsp;{{ user.last_name|title }}
+                </span>
+            </div>
+
+            {% if user.is_authenticated %}
+            <ul class="navbar-nav ml-auto ml-md-0-offset-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'admin_dashboard:logout' %}" >
+                    Logout</a>
+
+                </li>
+            </ul>
+            {% else %}
+
+                <ul class="navbar-nav ml-auto ml-md-0-offset-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'admin_dashboard:admin_login' %}" >
+                    Login</a>
+
+                </li>
+            </ul>
+
+            {% endif %}
+
+        </nav>
+
+
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Core</div>
+                            <a class="nav-link" href="{% url 'admin_dashboard:admin_dashboard' %}"
+                                ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Dashboard</a
+                            >
+                            <a class="nav-link" href="/scrap2cashadmin/"
+                                ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Main Dashboard</a
+                            >
+
+                            <div class="sb-sidenav-menu-heading">Interface</div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts"
+                                ><div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Posted Ads
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
+                            ></a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{% url 'admin_dashboard:all_unapprove_post' %}">
+                            Unapprooved Ads
+                            </a>
+
+                            <a class="nav-link" href="{% url 'admin_dashboard:all_approve_post' %}">Approoved Ads
+                            </a>
+                            <a class="nav-link" href="{% url 'admin_dashboard:all_suspended_post' %}">
+                            Suspended Ads
+                            </a>
+                        </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages"
+                                ><div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                User Management
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
+                            ></a>
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                        <a class="nav-link collapsed" href="{% url 'admin_dashboard:users' %}" aria-expanded="false" aria-controls="pagesCollapseAuth"
+                                        >
+                                        Users
+
+                                </a>
+
+
+                                </nav>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                       {{ user.first_name|title }}&nbsp;{{ user.last_name|title }}
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                {% block body %}
+                <main>
+                    <div class="container-fluid">
+                        <h1 class="mt-4">Dashboard</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ol>
+
+
+
+
+
+                        <div class="card mb-4">
+                            <div class="card-header"><i class="fas fa-table mr-1"></i>Recently Posted</div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Post Id</th>
+                                                <th>Material</th>
+                                    <!--             <th>Product Type</th> -->
+                                                <th>Category</th>
+                                                <th>Subcategory</th>
+                                                <th>Product Type</th>
+                                                <th>Price</th>
+                                                <th>Bargening</th>
+                                                <th>Posted date</th>
+                                                <th> View More </th>
+                                                <th>Approove</th>
+                                                <th>Suspende</th>
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                    {% for i in recently_added %}
+                                        <tr>
+                                             <td>{{ i.id }}</td>
+                                             <td> {{ i.material_id }} </td>
+
+                                             <td> {{ i.category_id }} </td>
+
+                                              <td> {{ i.sub_category_id }} </td>
+
+                                              <td> {{ i.product_type }} </td>
+
+
+                                              <td> {{ i.selling_price }} </td>
+
+                                              <td> {{ i.bargening }} </td>
+
+
+                                              <td> {{ i.created_at }} </td>
+
+                                             <td>
+    <a class="btn btn-info btn-sm" href="{% url 'admin_dashboard:view_post' i.id %}">View</a>
+                                              </td>
+                                              <td>
+     <a class="btn btn-success btn-sm" href="{% url 'admin_dashboard:approve_post' i.id %}">Approove</a>
+                                               </td>
+                                               <td>
+      <a class="btn btn-danger btn-sm" href="{% url 'admin_dashboard:suspend_post' i.id %}">Suspende</a>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </main>
+
+{% endblock body %}
+
+
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Scrap2Cash</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="{% static 'admin_dashboard/js/scripts.js' %}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="{% static 'admin_dashboard/assets/demo/chart-area-demo.js' %}"></script>
+        <script src="{% static 'admin_dashboard/assets/demo/chart-bar-demo.js' %}"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        <script src="{% static 'admin_dashboard/assets/demo/datatables-demo.js' %}"></script>
+    </body>
+</html>
